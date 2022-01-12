@@ -4,8 +4,7 @@
   "main": "src/main.ts",
   "private": "true",
   "scripts": {
-    "start": "esrun src/main.ts",
-    "sort": "esrun src/sort.ts"
+    "start": "esrun src/main.ts"
   },
   "dependencies": {
     "lodash-es": "^4.17.21",
