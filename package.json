@@ -1,0 +1,20 @@
+{
+  "name": "goodreads-browser",
+  "version": "0.0.0",
+  "main": "src/main.ts",
+  "private": "true",
+  "scripts": {
+    "start": "esrun src/main.ts",
+    "sort": "esrun src/sort.ts"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "lowdb": "^3.0.0",
+    "scrape-it": "^5.3.2"
+  },
+  "devDependencies": {
+    "@digitak/esrun": "^3.1.1",
+    "@types/lodash-es": "^4.17.5",
+    "typescript": "^4.5.4"
+  }
+}
