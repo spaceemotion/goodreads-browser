@@ -22,7 +22,7 @@ export const writeSeries = async (ctx: Context, results: Book[]) => {
 }
 
 export const parseCoverUrl = (url: string) => (
-  `${url}`.replace(/\._(?:S[XY]\d+_){1,}/, '')
+  `${url}`.replace(/\._(?:[A-Z]+[\d,]+_){1,}/, '')
 );
 
 export const parseNumber = (val: string) => (
