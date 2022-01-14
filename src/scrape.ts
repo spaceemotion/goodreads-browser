@@ -14,7 +14,7 @@ export const writeSeries = async (ctx: Context, results: Book[]) => {
     ...ctx.db.data,
     books: books.concat(results.map((book) => ({
       ...book,
-      series: /.*\(([^)]+)\)/.exec(book.title)?.[1].trim() ?? null,
+      series: book.series ?? /.*\(([^)]+)\)/.exec(book.title)?.[1].trim() ?? null,
     }))),
   };
 
