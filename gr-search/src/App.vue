@@ -299,7 +299,10 @@ export default defineComponent({
 
         acc[book.id] = {
           ...book,
+          rating: book.rating || (existing.rating ?? null),
+          ratings: book.ratings || (existing.ratings ?? null),
           publishedAt: book.publishedAt || (existing.publishedAt ?? null),
+          series: book.series ?? (existing.series ?? null),
         }
 
         return acc;
