@@ -123,7 +123,7 @@
 
         <div class="text-center text-stone-600 font-semibold leading-none">
           <div class="font-bold text-lg" v-text="title" />
-          {{ amount }} book(s) found
+          {{ amount.toLocaleString('en') }} book(s) found
           <span v-if="amount > 0">(Page {{ page + 1 }} of {{ Math.ceil(amount / perPage)}})</span>
         </div>
 
