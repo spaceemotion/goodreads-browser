@@ -1,9 +1,9 @@
 import scrapeIt, { ScrapeOptions } from "scrape-it";
 import { chunk, flattenDepth } from 'lodash-es';
 import { BASE_URL, getPage, writeSeries } from "../scrape";
-import type { Book, Database } from "../types";
+import type { Book, Context } from "../types";
 
-export async function scrapeTag(db: Database, tag: string, session: string) {
+export async function scrapeTag(ctx: Context, tag: string, session: string) {
   const options: ScrapeOptions = {
     books: {
       listItem: '.leftContainer .elementList',
@@ -75,7 +75,7 @@ export async function scrapeTag(db: Database, tag: string, session: string) {
     ],
   }
 
-  await writeSeries(db, data.books);
+  await writeSeries(ctx, data.books);
 
   // Paginated requests
   const pages = Math.min(25, (Math.floor(data.total / data.books.length) - 1));
@@ -103,5 +103,5 @@ export async function scrapeTag(db: Database, tag: string, session: string) {
 
   const bookList = flattenDepth(books, 2) as unknown as Book[];
 
-  await writeSeries(db, bookList);
+  await writeSeries(ctx, bookList);
 }

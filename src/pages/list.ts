@@ -1,8 +1,8 @@
 import { BASE_URL, scrape } from "../scrape";
-import { Database } from "../types";
+import type { Context } from "../types";
 
-export async function scrapeList(db: Database, id: string) {
-  await scrape(db, `/list/show/${id}`, {
+export async function scrapeList(ctx: Context, id: string) {
+  await scrape(ctx, `/list/show/${id}`, {
     title: {
       selector: 'h1.gr-h1',
     },

@@ -1,10 +1,14 @@
 import { Low, JSONFile } from 'lowdb';
 import type { Database, DatabaseContents } from "./types";
 
-export function createDatabase(...prefix: string[]): Database {
+export const createResultFile = (...prefix: string[]): string => {
   const rand = Math.random().toString(16).substring(2, 10); // 6de5ccda
-  const fileName = `./results/${prefix.filter((t) => !!t).join('-')}-${rand}.json`;
-  const adapter = new JSONFile<DatabaseContents>(fileName);
+
+  return `./results/${prefix.filter((t) => !!t).join('-')}-${rand}`;
+}
+
+export function createDatabase(fileName: string): Database {
+  const adapter = new JSONFile<DatabaseContents>(`${fileName}.json`);
 
   console.log(`Writing to ${fileName}`);
 

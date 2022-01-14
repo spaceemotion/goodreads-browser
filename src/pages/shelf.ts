@@ -1,8 +1,8 @@
 import { BASE_URL, parseCoverUrl, parseNumber, scrape } from "../scrape";
-import { Database } from "../types";
+import type { Context } from "../types";
 
-export async function scrapeShelf(db: Database, userId: string, query: string) {
-  await scrape(db, `/review/list/${userId}?shelf=${query}&view=table&per_page=100`, {
+export async function scrapeShelf(ctx: Context, userId: string, query: string) {
+  await scrape(ctx, `/review/list/${userId}?shelf=${query}&view=table&per_page=100`, {
     books: {
       listItem: 'table#books tr.bookalike',
       data: {

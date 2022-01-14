@@ -23,3 +23,14 @@ export interface ScrapeResults {
   title: string|null,
   nextPage: string|null,
 }
+
+export interface Logger {
+  log(line: string): void;
+  close(): void;
+}
+
+export interface Context {
+  db: Database,
+  logger: Logger,
+  prefix: string,
+}

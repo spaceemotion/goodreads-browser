@@ -1,8 +1,8 @@
 import { BASE_URL, scrape } from "../scrape";
-import { Database } from "../types";
+import type { Context } from "../types";
 
-export async function scrapeSearch(db: Database, query: string) {
-  await scrape(db, `/search?q=${query}&search_type=books&search%5Bfield%5D=title`, {
+export async function scrapeSearch(ctx: Context, query: string) {
+  await scrape(ctx, `/search?q=${query}&search_type=books&search%5Bfield%5D=title`, {
     books: {
       listItem: '.tableList tr',
       data: {
