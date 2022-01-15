@@ -9,6 +9,7 @@ const fileName = createResultFile('merge');
 const log = createLogger(fileName);
 
 const books: Record<number, Book> = {};
+let counter = 0;
 
 try {
   await Promise.all(
@@ -16,8 +17,12 @@ try {
       const old = new Low(new JSONFile<DatabaseContents>(file));
       await old.read();
 
-      log.log(`Merging ${file}...`);
+      const count = old.data.books?.length || 0;
+
+      log.log(`Merging ${file}... (${count} books})`);
       old.data.books?.reduce(merge, books);
+
+      counter += count;
     }),
   );
 
@@ -27,7 +32,8 @@ try {
 
   await db.write();
 
-  log.log(`Wrote ${db.data.books.length} book(s) to disk`);
+  const decrease = (((counter - db.data.books.length) / counter) * 100).toFixed(2);
+  log.log(`Wrote ${db.data.books.length} unqiue book(s) to disk (${counter} merged, ${decrease}% decrease)`);
 } finally {
   log.close();
 }
