@@ -94,7 +94,7 @@ export async function scrapeTag(ctx: Context, tag: string, session: string) {
           headers,
         }, options);
 
-        console.log('Grabbed ' + pageUrl);
+        ctx.logger.log('Grabbed ' + pageUrl);
 
         return nextPageData.books;
       }));
