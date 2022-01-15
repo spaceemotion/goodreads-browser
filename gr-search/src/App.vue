@@ -62,6 +62,7 @@
           <select v-model="sort" class="rounded-md px-3 py-2 border-2 focus:border-brown-800 focus:outline-none w-full">
             <option value="title">Title</option>
             <option value="rating">Rating</option>
+            <option value="ratings">Ratings</option>
             <option value="publishedAt">Year</option>
             <option value="series">Series</option>
           </select>
