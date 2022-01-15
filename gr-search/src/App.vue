@@ -298,8 +298,12 @@ export default defineComponent({
     const databases = ref(0);
     const isLoading = computed(() => loadCounter.value > 0);
 
-    const deduplicated = computed(() => Object.values(
-      books.value.reduce<Record<number, Book>>(merge, {})
+    const deduplicated = computed(() => (
+      databases.value > 1
+        ? Object.values(
+            books.value.reduce<Record<number, Book>>(merge, {})
+          )
+        : books.value
     ));
 
     const groupSeries = useStorage('groupSeries', true);
