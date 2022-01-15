@@ -22,6 +22,7 @@ export interface ScrapeResults {
   books: Book[],
   title: string|null,
   nextPage: string|null,
+  pageCount?: number,
 }
 
 export interface Logger {

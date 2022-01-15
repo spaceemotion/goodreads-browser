@@ -53,8 +53,12 @@ export async function scrapeShelf(ctx: Context, userId: string, query: string) {
       },
     },
     nextPage: {
-      selector: '#reviewPagination a.next_page',
+      selector: '#pagestuff #reviewPagination a.next_page',
       attr: 'href',
     },
+    pageCount: {
+      selector: '#pagestuff #reviewPagination a:nth-last-child(2)',
+      convert: (val) => Number.parseInt(val, 10),
+    }
   });
 }
