@@ -21,6 +21,12 @@ npm run start tag <name> <sessionCookieId>
 npm run start search <name>
 ```
 
+If you have too many database files and would like to merge them run:
+```bash
+npm run merge <file1> <file2> ...
+```
+A new merged database will be written to disk.
+
 ## Open the browser
 ![Browser](/img/browser-screenshot.jpg)
 

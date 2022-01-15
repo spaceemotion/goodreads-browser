@@ -258,6 +258,7 @@ import { defineComponent } from "@vue/runtime-core";
 import { computed, ref, watch } from "vue";
 import { orderBy } from "lodash";
 import { ignorableWatch, useStorage } from "@vueuse/core";
+import { merge } from '../../src/mergeBook';
 
 import Field from "./components/Field.vue";
 
@@ -295,19 +296,7 @@ export default defineComponent({
     const isLoading = computed(() => loadCounter.value > 0);
 
     const deduplicated = computed(() => Object.values(
-      books.value.reduce<Record<number, Book>>((acc, book) => {
-        const existing: Partial<Book> = acc[book.id] ?? {};
-
-        acc[book.id] = {
-          ...book,
-          rating: book.rating || (existing.rating ?? null),
-          ratings: book.ratings || (existing.ratings ?? null),
-          publishedAt: book.publishedAt || (existing.publishedAt ?? null),
-          series: book.series ?? (existing.series ?? null),
-        }
-
-        return acc;
-      }, {})
+      books.value.reduce<Record<number, Book>>(merge, {})
     ));
 
     const groupSeries = useStorage('groupSeries', true);

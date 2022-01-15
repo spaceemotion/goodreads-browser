@@ -4,7 +4,8 @@
   "main": "src/main.ts",
   "private": "true",
   "scripts": {
-    "start": "esrun src/main.ts"
+    "start": "esrun src/main.ts",
+    "merge": "esrun src/merge.ts"
   },
   "dependencies": {
     "lodash-es": "^4.17.21",
