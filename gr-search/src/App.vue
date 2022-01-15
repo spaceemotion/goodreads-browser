@@ -204,7 +204,10 @@
 
             <span class="text-stone-600 text-sm flex-grow">
               by
-              <a v-for="author in item.authors" :key="author.name" :href="author.url" v-text="author.name" class="hover:underline" />
+              <template v-for="(author, idx) in item.authors" :key="author.name">
+                <span v-if="idx > 0">, </span>
+                <a :href="author.url" v-text="author.name" class="hover:underline" />
+              </template>
             </span>
 
             <div class="flex space-x-2.5 text-stone-600 text-sm font-semibold">
