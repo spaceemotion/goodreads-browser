@@ -34,7 +34,7 @@ export async function scrapeShelf(ctx: Context, userId: string, query: string) {
         },
         ratings: {
           selector: '.field.num_ratings .value',
-          convert: parseNumber,
+          convert: (val) => Number.parseInt(val.replace(',', ''), 10) || null,
         },
         publishedAt: {
           selector: '.field.date_pub .value',
