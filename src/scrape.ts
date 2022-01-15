@@ -1,9 +1,6 @@
 import scrapeIt, { ScrapeOptions } from "scrape-it";
 import type { Book, ScrapeResults, Context } from './types';
-
-export const BASE_URL = 'https://www.goodreads.com';
-
-export const getPage = (url: string) => (/https?:\/\//.test(url) ? url : BASE_URL + url);
+import { getPage } from "./url";
 
 export const writeSeries = async (ctx: Context, results: Book[]) => {
   const books = ctx.db.data?.books ?? [];

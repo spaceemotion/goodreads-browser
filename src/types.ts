@@ -1,15 +1,17 @@
 import type { Low } from "lowdb";
 
+export interface Author {
+  name: string,
+  url: string,
+}
+
 export interface Book {
   id: number,
   title: string,
   rating: number | null,
   ratings: number,
   publishedAt: number | null,
-  authors: Array<{
-    name: string,
-    url: string,
-  }>,
+  authors: Author[],
   coverUrl: string,
   url: string,
   series?: string,
