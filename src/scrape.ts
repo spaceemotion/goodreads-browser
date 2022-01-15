@@ -41,10 +41,10 @@ export async function scrape(ctx: Context, initialPage: string, options: ScrapeO
   ctx.db.data = { ...ctx.db.data, title: data.title || '' };
   await writeSeries(ctx, data.books);
 
-  ctx.logger.log(`[${ctx.prefix}] ${data.pageCount} pages found`);
-
   // Paginated requests
   if (data.pageCount) {
+    ctx.logger.log(`[${ctx.prefix}] ${data.pageCount} pages found`);
+
     const promises = [];
     const fetchPage = async (num: number) => {
       const url = `${getPage(initialPage)}&page=${num}`;
