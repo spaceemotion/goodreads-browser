@@ -1,5 +1,6 @@
-import { BASE_URL, scrape } from "../scrape";
+import { scrape } from "../scrape";
 import type { Context } from "../types";
+import { getPage } from "../url";
 
 export async function scrapeSearch(ctx: Context, query: string) {
   await scrape(ctx, `/search?q=${query}&search_type=books&search%5Bfield%5D=title`, {
@@ -48,7 +49,7 @@ export async function scrapeSearch(ctx: Context, query: string) {
         url: {
           selector: '.bookTitle',
           attr: 'href',
-          convert: (val) => BASE_URL + val,
+          convert: (val) => getPage(val),
         },
       },
     },

@@ -1,5 +1,6 @@
-import { BASE_URL, parseCoverUrl, parseNumber, scrape } from "../scrape";
+import { parseCoverUrl, scrape } from "../scrape";
 import type { Context } from "../types";
+import { getPage } from "../url";
 
 export async function scrapeShelf(ctx: Context, userId: string, query: string) {
   await scrape(ctx, `/review/list/${userId}?shelf=${query}&view=table&per_page=100`, {
@@ -48,7 +49,7 @@ export async function scrapeShelf(ctx: Context, userId: string, query: string) {
         url: {
           selector: '.field.title a',
           attr: 'href',
-          convert: (val) => BASE_URL + val,
+          convert: (val) => getPage(val),
         },
       },
     },

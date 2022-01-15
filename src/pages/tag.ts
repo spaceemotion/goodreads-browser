@@ -1,7 +1,8 @@
 import scrapeIt, { ScrapeOptions } from "scrape-it";
 import { chunk, flattenDepth } from 'lodash-es';
-import { BASE_URL, getPage, writeSeries } from "../scrape";
+import { writeSeries } from "../scrape";
 import type { Book, Context } from "../types";
+import { getPage } from "../url";
 
 export async function scrapeTag(ctx: Context, tag: string, session: string) {
   const options: ScrapeOptions = {
@@ -50,7 +51,7 @@ export async function scrapeTag(ctx: Context, tag: string, session: string) {
         url: {
           selector: '.bookTitle',
           attr: 'href',
-          convert: (val) => BASE_URL + val,
+          convert: (val) => getPage(val),
         },
       },
     },
