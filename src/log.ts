@@ -5,8 +5,9 @@ export const createLogger = (filename: string) => {
 
   return {
     log(line: string) {
-      console.log(line);
-      stream.write(`${line}\n`);
+      const prefix = `${(new Date()).toISOString()}: `;
+      console.log(prefix + line);
+      stream.write(`${prefix}${line}\n`);
     },
 
     close() {
