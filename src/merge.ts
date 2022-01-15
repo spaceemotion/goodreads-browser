@@ -19,7 +19,7 @@ try {
 
       const count = old.data.books?.length || 0;
 
-      log.log(`Merging ${file}... (${count} books})`);
+      log.log(`Merging ${file}... (${count} books)`);
       old.data.books?.reduce(merge, books);
 
       counter += count;
