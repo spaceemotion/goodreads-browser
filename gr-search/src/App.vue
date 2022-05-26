@@ -343,10 +343,10 @@ export default defineComponent({
           list.sort((a, b) => (
             // Do a natural sort (1, 2, ..., 10, 11, ...)
             a.series?.replace(',', '').localeCompare(
-              b.series?.replace(',', ''),
+              b.series?.replace(',', '') ?? '',
               'en',
               { numeric: true },
-            )
+            ) ?? 0
           ))[0]
         ))
         .concat(concat);
@@ -374,8 +374,8 @@ export default defineComponent({
         if (
           (yearFrom.value && publishedYear < yearFrom.value) ||
           (yearTo.value && publishedYear > yearTo.value) ||
-          (ratingFrom.value && book.rating < ratingFrom.value) ||
-          (ratingTo.value && book.rating > ratingTo.value)
+          (ratingFrom.value && (book.rating ?? 0) < ratingFrom.value) ||
+          (ratingTo.value && (book.rating ?? 0) > ratingTo.value)
         ) {
           return false;
         }
@@ -466,7 +466,7 @@ export default defineComponent({
 
       updateDatabase(e: Event) {
         const fileList = (e.target as HTMLInputElement).files;
-        if (fileList.length < 1) {
+        if (fileList === null || fileList.length < 1) {
           return;
         }
 
@@ -475,7 +475,7 @@ export default defineComponent({
         databases.value = fileList.length;
 
         const loadCallback = (event: ProgressEvent<FileReader>) => {
-          const db: DatabaseContents = JSON.parse(event.target.result + '');
+          const db: DatabaseContents = JSON.parse(event.target?.result + '');
           books.value = books.value.concat(db.books ?? []);
 
           if (fileList.length === 1 && db.title && !title.value) {
@@ -495,7 +495,10 @@ export default defineComponent({
 
           loadCounter.value++;
 
-          reader.readAsText(fileList.item(fileIdx));
+          const file = fileList.item(fileIdx);
+          if (file !== null) {
+            reader.readAsText(file);
+          }
         }
       },
 
