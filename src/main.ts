@@ -13,7 +13,7 @@ enum Types {
   Tag = 'tag',
 }
 
-const [,, type, input, input2] = process.argv;
+const [,, type = '', input, input2] = process.argv;
 const fileName = createResultFile(type, input, input2);
 const db = createDatabase(fileName);
 const ctx: Context = {
