@@ -65,6 +65,7 @@
             <option value="ratings">Ratings</option>
             <option value="publishedAt">Year</option>
             <option value="series">Series</option>
+            <option value="ratingsWeighted">Ratings (weighted)</option>
           </select>
           <select v-model="order" class="rounded-md px-3 py-2 border-2 focus:border-brown-800 focus:outline-none">
             <option value="asc">Asc</option>
@@ -399,11 +400,16 @@ export default defineComponent({
     const sort = useStorage('sortField', "title");
     const order = useStorage<'asc'|'desc'>('sortOrder', "asc");
 
-    const sorted = computed<Book[]>(() =>
-      sort.value === 'series'
-        ? orderBy(filtered.value, (book: Book) => book.series?.toLowerCase(), order.value)
-        : orderBy(filtered.value, sort.value, order.value)
-    );
+    const sorted = computed<Book[]>(() => {
+      switch (sort.value) {
+        case 'series':
+          return orderBy(filtered.value, (book: Book) => book.series?.toLowerCase(), order.value)
+        case 'ratingsWeighted':
+          return orderBy(filtered.value, (book: Book) => (book.rating ?? 0) * Math.tanh(0.02 * book.ratings), order.value)
+        default:
+          return orderBy(filtered.value, sort.value, order.value)
+      }
+    });
 
     const perPage = 24;
     const page = useStorage('currentPage', 0);
