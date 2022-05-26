@@ -342,8 +342,8 @@ export default defineComponent({
         .map((list) => (
           list.sort((a, b) => (
             // Do a natural sort (1, 2, ..., 10, 11, ...)
-            a.series?.replace(',', '').localeCompare(
-              b.series?.replace(',', '') ?? '',
+            a.series?.replace(/[,#]/, '').replace(/\s+/, ' ').localeCompare(
+              b.series?.replace(/[,#]/, '').replace(/\s+/, ' ') ?? '',
               'en',
               { numeric: true },
             ) ?? 0
