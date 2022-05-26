@@ -72,5 +72,8 @@ export async function scrape(ctx: Context, initialPage: string, options: ScrapeO
 
     nextPage = nextPageData.nextPage;
     pageCount++;
+
+    // Wait some time between pages to avoid bot limiting
+    await new Promise(r => setTimeout(r, 2000 + Math.random() * 3000));
   }
 }
